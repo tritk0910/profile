@@ -1,4 +1,5 @@
 "use client";
+import { AudioToggle } from "@/components/audio-toggle";
 import {
   Tooltip,
   TooltipContent,
@@ -55,13 +56,16 @@ export default function Status({
           />
         )}
       </div>
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col items-center space-y-2">
         <Tooltip delayDuration={0}>
-          <TooltipTrigger>
-            <span className="font-space text-3xl font-bold">
-              {data.global_name}
-            </span>
-          </TooltipTrigger>
+          <div className="relative flex w-full items-center justify-center">
+            <TooltipTrigger asChild>
+              <span className="font-space w-fit text-3xl font-bold">
+                {data.global_name}
+              </span>
+            </TooltipTrigger>
+            <AudioToggle className="absolute! right-0" />
+          </div>
           <TooltipContent side="bottom" className="px-5 py-0">
             <p className="font-space text-lg font-extrabold">
               ID: {data.username}

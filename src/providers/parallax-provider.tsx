@@ -12,8 +12,8 @@ export default function ParallaxProvider({ children }: PropsWithChildren) {
 
   const randomizeVideoBackground = () => {
     const videoLinks = [
-      "https://cdn.discordapp.com/attachments/394135612669820928/1471329776382906612/video-4.mp4?ex=698e8a22&is=698d38a2&hm=c23ff2bf1126de9869c3f5f4e5528cddc227c35e39fa311459c756c646ab903d&",
-      "https://cdn.discordapp.com/attachments/394135612669820928/1471325957603332217/Apocalypse_Dreams_Acoustic_Demo.mp4?ex=698e8694&is=698d3514&hm=d1250fd460f126d72d77740e5eb746f2cb3315244720a1b57830515a7656791f&",
+      "https://q03t3sf9vv.ufs.sh/f/D7j0WhSILnBstqNTUAQ1ncmjoQx62GBqOhrP0Rl4C3HLMgeI",
+      "https://q03t3sf9vv.ufs.sh/f/D7j0WhSILnBseVDOzf1LT3ywCItFdzWvk9U6NZrb1JSqiVx7",
     ];
     const randomIndex = Math.floor(Math.random() * videoLinks.length);
     setVideoUrl(videoLinks[randomIndex]);
@@ -48,6 +48,18 @@ export default function ParallaxProvider({ children }: PropsWithChildren) {
     window.addEventListener("play-background-video", handlePlay);
     return () =>
       window.removeEventListener("play-background-video", handlePlay);
+  }, []);
+
+  useEffect(() => {
+    const handlePlay = () => {
+      const video = videoRef.current;
+      if (!video) return;
+      video.muted = video.muted ? false : true; // Toggle mute state
+    };
+
+    window.addEventListener("toggle-background-sound", handlePlay);
+    return () =>
+      window.removeEventListener("toggle-background-sound", handlePlay);
   }, []);
 
   if (!videoUrl) {
